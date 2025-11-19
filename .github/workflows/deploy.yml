@@ -13,17 +13,17 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up kubectl
-        uses: azure/setup-kubectl@v3
+        uses: actions/kubectl@v3
       
       - name: Configure kubeconfig
         run: |
           echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
 
       - name: Deploy Frontend
-        run: kubectl apply -f k8s/frontend.yaml
+        run: kubectl apply -f k8s/frontend-deployment.yml
 
       - name: Deploy Backend
-        run: kubectl apply -f k8s/backend.yaml
+        run: kubectl apply -f k8s/backend-deployment.yml
 
       - name: Deploy Database
-        run: kubectl apply -f k8s/database.yaml
+        run: kubectl apply -f k8s/mysql-deployment.yml

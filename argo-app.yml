@@ -2,14 +2,16 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: qs-project
+  namespace: argocd
 spec:
   project: default
   source:
     repoURL: 'https://github.com/Siddhi1708/kubernetes-qst.git'
     targetRevision: main
-    path:  kubernetes-qst/k8s/  # The folder containing all your frontend, backend, and database YAML files
-  destination: 
-    server: 'https://172.31.33.61:6443'
+    path: k8s
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
   syncPolicy:
     automated:
       prune: true
